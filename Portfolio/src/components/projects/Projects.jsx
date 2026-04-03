@@ -31,7 +31,6 @@ const Projects = () => {
             </div>
           </div>
 
-          {/* 2. E-Commerce Engine */}
           <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-2xl hover:border-blue-500 transition-all flex flex-col justify-between">
             <div>
               <h3 className="text-2xl font-bold text-white uppercase tracking-tight mb-4">E-Commerce API</h3>
@@ -49,7 +48,6 @@ const Projects = () => {
             <a href="https://github.com/ahmedehhab/E-commerce" target="_blank" rel="noreferrer" className="text-xs font-bold text-blue-500 hover:text-white transition-colors">VIEW SOURCE CODE →</a>
           </div>
 
-          {/* 3. Saraha Messaging */}
           <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-2xl hover:border-blue-500 transition-all flex flex-col justify-between">
             <div>
               <h3 className="text-2xl font-bold text-white uppercase tracking-tight mb-4">Saraha Backend</h3>

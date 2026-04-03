@@ -27,7 +27,6 @@ const Footer = () => {
                         </nav>
                     </div>
 
-                    {/* Social Section */}
                     <div className="footer-section">
                         <h4 className="section-title">Connect</h4>
                         <div className="footer-links">
