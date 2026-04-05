@@ -1,36 +1,36 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
-import LanguageContext from '../context/LanguageContext';
+import LanguageContext from '../context/LanguageContext'; 
 
 const Navbar = () => {
   const { lang, setLang } = useContext(LanguageContext);
   const cartCount = useSelector((state) => state.cart.items.reduce((sum, item) => sum + item.quantity, 0));
 
-  const t = {
+  const translate = {
     products: lang === 'ar' ? 'المنتجات' : 'Products',
     cart: lang === 'ar' ? 'السلة' : 'Cart',
-    login: lang === 'ar' ? 'دخول' : 'Login',
+    contact: lang === 'ar' ? 'اتصل بنا' : 'Contact Us',
     register: lang === 'ar' ? 'تسجيل' : 'Register',
     logo: lang === 'ar' ? 'تطبيق المنتجات' : 'Products App'
   };
 
   return (
     <nav className="flex items-center justify-between px-10 py-4 bg-white border-b border-gray-200 sticky top-0 z-50">
-      <h2 className="text-xl font-bold text-gray-800">{t.logo}</h2>
+      <h2 className="text-xl font-bold text-gray-800">{translate.logo}</h2>
 
       <div className="flex items-center gap-8 text-sm font-medium text-gray-600">
-        <Link to="/" className="hover:text-black transition-colors">{t.products}</Link>
+        <Link to="/" className="hover:text-black transition-colors">{translate.products}</Link>
         <Link to="/cart" className="relative hover:text-black transition-colors">
-          {t.cart}
+          {translate.cart}
           {cartCount > 0 && (
             <span className="absolute -top-2 -right-6 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-emerald-600 px-2 text-[10px] font-bold text-white">
               {cartCount}
             </span>
           )}
         </Link>
-        <Link to="/login" className="hover:text-black transition-colors">{t.login}</Link>
-        <Link to="/register" className="hover:text-black transition-colors">{t.register}</Link>
+        <Link to="/contact" className="hover:text-black transition-colors">{translate.contact}</Link>
+        <Link to="/register" className="hover:text-black transition-colors">{translate.register}</Link>
 
         <div className="relative group ml-4 border-l pl-4 rtl:border-l-0 rtl:pl-0 rtl:border-r rtl:pr-4 border-gray-200">
           <button className="flex items-center gap-2 hover:text-emerald-700 transition-colors uppercase font-bold text-xs tracking-widest bg-gray-50 px-3 py-2 rounded-lg">

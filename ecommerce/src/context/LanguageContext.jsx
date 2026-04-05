@@ -7,7 +7,6 @@ export const LanguageProvider = ({ children }) => {
   useEffect(() => {
     const direction = lang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.dir = direction;
-    document.documentElement.lang = lang;
   }, [lang]);
 
   return (
