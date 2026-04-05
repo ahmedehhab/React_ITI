@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import  LanguageContext  from '../context/LanguageContext'; 
+import { useSelector } from 'react-redux';
+import LanguageContext from '../context/LanguageContext';
 
 const Navbar = () => {
   const { lang, setLang } = useContext(LanguageContext);
+  const cartCount = useSelector((state) => state.cart.items.reduce((sum, item) => sum + item.quantity, 0));
 
   const t = {
     products: lang === 'ar' ? 'المنتجات' : 'Products',
@@ -19,7 +21,14 @@ const Navbar = () => {
 
       <div className="flex items-center gap-8 text-sm font-medium text-gray-600">
         <Link to="/" className="hover:text-black transition-colors">{t.products}</Link>
-        <Link to="/cart" className="hover:text-black transition-colors">{t.cart}</Link>
+        <Link to="/cart" className="relative hover:text-black transition-colors">
+          {t.cart}
+          {cartCount > 0 && (
+            <span className="absolute -top-2 -right-6 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-emerald-600 px-2 text-[10px] font-bold text-white">
+              {cartCount}
+            </span>
+          )}
+        </Link>
         <Link to="/login" className="hover:text-black transition-colors">{t.login}</Link>
         <Link to="/register" className="hover:text-black transition-colors">{t.register}</Link>
 

@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/slices/cartSlice';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
       .then(res => res.json())
       .then(data => {
         setProduct(data);
-        setMainImage(data.thumbnail); 
+        setMainImage(data.thumbnail);
       });
   }, [id]);
 
@@ -22,6 +26,22 @@ const ProductDetails = () => {
   );
 
   const isOutOfStock = product.stock === 0;
+
+  const cartPayload = {
+    id: product.id,
+    title: product.title,
+    price: product.price,
+    thumbnail: product.thumbnail,
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(cartPayload));
+  };
+
+  const handleBuyNow = () => {
+    dispatch(addToCart(cartPayload));
+    navigate('/cart');
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -85,6 +105,7 @@ const ProductDetails = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 disabled={isOutOfStock}
+                onClick={handleBuyNow}
                 className={`flex-1 py-4 px-8 rounded-full font-bold text-lg transition-all ${
                   isOutOfStock 
                   ? "bg-gray-200 text-gray-400 cursor-not-allowed" 
@@ -96,6 +117,7 @@ const ProductDetails = () => {
               
               <button 
                 disabled={isOutOfStock}
+                onClick={handleAddToCart}
                 className={`flex-1 border-2 py-4 px-8 rounded-full font-bold text-lg transition-all ${
                   isOutOfStock 
                   ? "border-gray-200 text-gray-300 cursor-not-allowed" 
